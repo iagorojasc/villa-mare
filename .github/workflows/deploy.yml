@@ -1,0 +1,39 @@
+name: Publicar web
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 */3 * * *"   # actualiza la disponibilidad cada 3 horas
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Actualizar disponibilidad desde el calendario iCal
+        env:
+          ICAL_URLS: ${{ secrets.ICAL_URLS }}
+        run: |
+          if [ -n "$ICAL_URLS" ]; then
+            python3 tools/sync_availability.py || echo "::warning::No se pudo actualizar la disponibilidad; se usa la última guardada"
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

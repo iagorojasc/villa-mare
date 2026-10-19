@@ -1,0 +1,3 @@
+# QUITAR el Disallow al lanzar la web al público
+User-agent: *
+Disallow: /

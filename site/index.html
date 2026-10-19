@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Villa Mare · Villa con piscina en Granada, a los pies de Sierra Nevada</title>
+<meta name="description" content="Villa con piscina de agua salada, jardín de 1.000 m² y vistas a Granada y Sierra Nevada. 7 dormitorios, más de 16 huéspedes, a 10 minutos de la Alhambra.">
+<meta property="og:title" content="Villa Mare · Granada, a los pies de Sierra Nevada">
+<meta property="og:description" content="Piscina, jardín enorme y vistas al valle para grupos y familias. A 10 minutos de la Alhambra.">
+<meta property="og:image" content="img/hero.jpg">
+<meta name="theme-color" content="#fbf6ee">
+<meta name="robots" content="noindex, nofollow"> <!-- QUITAR al lanzar la web al público -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="css/style.css?v=1792401771">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VacationRental","name":"Villa Mare","description":"Villa con piscina de agua salada y jardín de más de 1.000 m² en La Zubia, Granada, junto a Sierra Nevada.","address":{"@type":"PostalAddress","addressLocality":"La Zubia","addressRegion":"Granada","addressCountry":"ES"},"image":["img/hero.jpg","img/piscina.jpg","img/salon.jpg"],"numberOfRooms":7,"occupancy":{"@type":"QuantitativeValue","minValue":16},"petsAllowed":true,"aggregateRating":{"@type":"AggregateRating","ratingValue":4.95,"reviewCount":55,"bestRating":5},"checkinTime":"16:00","checkoutTime":"11:00"}
+</script>
+</head>
+<body>
+<div id="bar"></div>
+
+<nav id="nav">
+  <a class="logo" href="#top">Villa Mare</a>
+  <ul>
+    <li><a href="#recorrido">Recorrido</a></li>
+    <li><a href="#piscina">Piscina</a></li>
+    <li><a href="#espacios">Espacios</a></li>
+    <li><a href="#reunirse">Reunirse</a></li>
+    <li><a href="#dormitorios">Dormitorios</a></li>
+    <li><a href="#comodidades">Comodidades</a></li>
+    <li><a href="#entorno">Entorno</a></li>
+    <li><a href="#faq">Preguntas</a></li>
+  </ul>
+  <div class="navr">
+    <button class="lang" data-lang-btn aria-label="Idioma / Language"><b data-l="es">ES</b><b data-l="en">EN</b></button>
+    <a class="btn" href="#reservar">Reservar</a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><i></i><i></i></button>
+  </div>
+</nav>
+<div class="menu" id="menu">
+  <a href="#recorrido">Recorrido</a><a href="#piscina">Piscina</a><a href="#espacios">Espacios</a><a href="#dormitorios">Dormitorios</a><a href="#comodidades">Comodidades</a><a href="#entorno">Entorno</a><a href="#faq">Preguntas</a>
+  <button class="lang big" data-lang-btn aria-label="Idioma / Language"><b data-l="es">ES</b><b data-l="en">EN</b></button>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="slot" id="heroMedia">
+    <img src="img/hero.jpg" alt="Villa Mare con su jardín de césped y la canasta de baloncesto">
+    <video data-src="video/hero-dron.mp4" muted loop playsinline preload="auto"></video>
+  </div>
+  <div class="wrap txt">
+    <p class="eyebrow" style="color:#ffd9bf">La Zubia · Granada</p>
+    <h1 id="h1" data-dyn><span class="w"><span>Una</span></span> <span class="w"><span>villa</span></span> <span class="w"><span>a</span></span> <span class="w"><span>los</span></span> <span class="w"><span>pies</span></span> <span class="w"><span>de</span></span> <span class="w"><span><em style="color:#ffd2b3">Sierra</em></span></span> <span class="w"><span><em style="color:#ffd2b3">Nevada</em></span></span></h1>
+    <p class="sub">Piscina, jardín enorme y vistas al valle. Para grupos y familias que quieren estar juntos, a 10 minutos de la Alhambra.</p>
+    <div class="cta"><a class="btn" href="#reservar">Ver disponibilidad</a><a class="btn ghost" href="#recorrido">Recorrer la villa</a></div>
+  </div>
+  <div class="badge"><b>4,95</b><small>★ Favorito de los viajeros<br>55 evaluaciones</small></div>
+</header>
+
+<main>
+<!-- INTRO -->
+<section class="intro">
+  <div class="wrap">
+    <p class="eyebrow">Bienvenidos</p>
+    <p class="big" id="bigtext" data-dyn>Más de mil metros de luz, jardín y sol para compartir mesa, piscina y atardeceres con todos los tuyos.</p>
+    <div class="facts">
+      <div class="fact"><b data-dyn data-n="16" data-plus="1">0</b><small>huéspedes</small></div>
+      <div class="fact"><b data-dyn data-n="7">0</b><small>dormitorios</small></div>
+      <div class="fact"><b data-dyn data-n="17">0</b><small>camas</small></div>
+      <div class="fact"><b data-dyn data-n="5">0</b><small>baños</small></div>
+      <div class="fact"><b data-dyn data-n="1000" data-plus="1">0</b><small>m² de parcela</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECORRIDO -->
+<section class="tour" id="recorrido" aria-label="Recorrido por la villa">
+  <p class="eyebrow label">Recorrido</p>
+  <div class="layer"><div class="slot"><img src="img/fachada.jpg" alt="Fachada principal de la villa"><video data-src="video/fachada.mp4" muted loop playsinline preload="auto"></video></div></div>
+  <div class="layer"><div class="slot"><img src="img/piscina.jpg" alt="Piscina vista desde arriba"><video data-src="video/piscina.mp4" muted loop playsinline preload="auto"></video></div></div>
+  <div class="layer"><div class="slot"><img src="img/salon.jpg" alt="Salón con ventanales y chimenea"><video data-src="video/salon.mp4" muted loop playsinline preload="auto"></video></div></div>
+  <div class="layer"><div class="slot"><img src="img/porche.jpg" alt="Porche con mesa grande"><video data-src="video/porche.mp4" muted loop playsinline preload="auto"></video></div></div>
+  <div class="layer"><div class="slot"><img src="img/atardecer.jpg" alt="Atardecer sobre Sierra Nevada"><video data-src="video/atardecer.mp4" muted loop playsinline preload="auto"></video></div></div>
+  <div class="cap" id="cap" data-dyn><h3>La llegada</h3><p>Una calle tranquila y una casa luminosa que te recibe con sol.</p></div>
+  <div class="prog"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- PISCINA -->
+<section class="sec" id="piscina">
+  <div class="wrap">
+    <div class="row">
+      <div class="media slot" id="poolMedia"><img src="img/piscina2.jpg" alt="Piscina y terraza con zona de comidas"><video data-src="video/dia-noche.mp4" muted loop playsinline preload="auto"></video></div>
+      <div class="reveal">
+        <p class="eyebrow">Verano de abril a octubre</p>
+        <h2>Una de las pocas <em>piscinas</em> de la zona</h2>
+        <p>Piscina privada de agua salada, disponible las 24 horas, con tumbonas, sombrillas, mesas para comer al aire libre y el valle de Granada de fondo. De día es pura luz; de noche, la piscina se enciende.</p>
+        <ul class="ticks"><li>Agua salada, juguetes para la piscina incluidos</li><li>Zona de descanso con tumbonas y hamaca</li><li>Comedor exterior, barbacoa y mesa de ping-pong</li><li>Vallado perimetral en todo el jardín</li></ul>
+        <span class="pool-note">☀ Disponible de abril a octubre, según temporada</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPACIOS -->
+<section class="sec spaces" id="espacios">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Los espacios</p><h2>Cada rincón, <em>pensado para estar juntos</em></h2></div>
+    <div class="sp-grid">
+      <div class="sp-list" id="spList" role="tablist" data-dyn></div>
+      <div class="sp-view" id="spView" data-dyn><div class="sp-dots" id="spDots"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA REUNIRSE Y COMER -->
+<section class="sec reunir" id="reunirse"><div class="wrap" id="meet" data-dyn></div></section>
+
+<!-- DORMITORIOS -->
+<section class="sec" id="dormitorios">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Descansar</p><h2>7 dormitorios, <em>17 camas</em> y 5 baños</h2><p class="lead">Habitaciones luminosas con suelos de mármol, ropa de cama de algodón, cortinas opacas y armarios. Un baño o más para que nadie espere por la mañana.</p></div>
+    <div class="beds reveal">
+      <div class="bed"><b>Dormitorio 1</b><span>1 cama de matrimonio</span></div>
+      <div class="bed"><b>Dormitorio 2</b><span>1 cama de matrimonio, 1 individual y 1 sofá cama</span></div>
+      <div class="bed"><b>Dormitorio 3</b><span>1 cama de matrimonio</span></div>
+      <div class="bed"><b>+ 4 dormitorios</b><span>Consúltanos la distribución completa de las 17 camas</span></div>
+    </div>
+  </div>
+  <div class="car-nav"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
+  <div class="car"><div class="car-track" id="carTrack" data-dyn></div></div>
+</section>
+
+<!-- FAMILIA Y OCIO -->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap">
+    <div class="row rev">
+      <div class="media slot"><img src="img/jardin.jpg" alt="Jardín de césped con casita y canasta"><video data-src="video/jardin.mp4" muted loop playsinline preload="auto"></video></div>
+      <div class="reveal">
+        <p class="eyebrow">Planes para todas las edades</p>
+        <h2>Jardín, juegos y <em>barbacoa</em></h2>
+        <p>Más de 1.000 m² de parcela con césped, canasta de baloncesto, casita y estructura de juegos para los más pequeños, mesa de ping-pong y una sala de juegos para los días de lluvia. Los mayores tienen barbacoa, hamaca y sobremesas bajo el porche.</p>
+        <ul class="ticks"><li>Parque infantil al aire libre y sala de juegos interior</li><li>Libros y juguetes para todas las edades (0 a 10 años y más)</li><li>Cuna y parque de viaje disponibles previa solicitud</li><li>Barbacoa con parrilla, carbón y brochetas</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMODIDADES -->
+<section class="sec amen" id="comodidades">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Comodidades</p><h2>Han pensado <em>en todo</em></h2><p class="lead">Estas son algunas de las 84 comodidades de la villa.</p></div>
+    <div class="tabs" id="amTabs" role="tablist" data-dyn></div>
+    <div class="chips" id="amChips" data-dyn></div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="sec" id="galeria">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Galería</p><h2>Mira la villa <em>con calma</em></h2></div>
+    <div class="mason" id="mason" data-dyn></div>
+  </div>
+</section>
+
+<!-- NOTA -->
+<section class="sec score" id="opiniones">
+  <div class="wrap">
+    <p class="eyebrow" style="color:#cfeaf7">Favorito de los viajeros</p>
+    <div class="num">4,95</div>
+    <div class="stars">★★★★★</div>
+    <p>55 evaluaciones · el 95 % con 5 estrellas · Superanfitriona</p>
+    <div class="cats">
+      <div class="cat"><b>5,0</b><small>Limpieza</small></div>
+      <div class="cat"><b>5,0</b><small>Veracidad</small></div>
+      <div class="cat"><b>5,0</b><small>Llegada</small></div>
+      <div class="cat"><b>5,0</b><small>Comunicación</small></div>
+      <div class="cat"><b>4,9</b><small>Ubicación</small></div>
+      <div class="cat"><b>4,9</b><small>Calidad</small></div>
+    </div>
+    <div class="quotes">
+      <div class="quote"><p>Nos impresionó el tamaño en cuanto llegamos; en las fotos la propiedad parece mucho más pequeña.</p><small>Stephan · junio de 2026 · reseña de huésped</small></div>
+      <div class="quote"><p>Villa Mare era espaciosa y ofrecía unas vistas impresionantes desde la zona de estar. Han pensado en todo.</p><small>Patricia · abril de 2026 · reseña de huésped</small></div>
+      <div class="quote"><p>Es acogedora y está muy cuidada. Los propietarios son muy simpáticos, atentos y saben cuidar a los inquilinos.</p><small>Nerea · agosto de 2026 · reseña de huésped</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTORNO -->
+<section class="sec" id="entorno">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Ubicación</p><h2>Granada, la sierra y el mar, <em>a mano</em></h2><p class="lead">En La Zubia, una zona residencial junto al parque natural de Sierra Nevada, con calle muy tranquila y sin apenas tráfico. Supermercados y comercios cerca y bus 175 a Granada.</p></div>
+    <div class="pgrid">
+      <div class="pcard reveal"><b>10 min</b><span>Alhambra y centro de Granada</span></div>
+      <div class="pcard reveal"><b>40 min</b><span>Estación de esquí de Sierra Nevada</span></div>
+      <div class="pcard reveal"><b>45 min</b><span>Costa Tropical</span></div>
+      <div class="pcard reveal"><b>Bus 175</b><span>Línea a Granada, cerca de la villa</span></div>
+    </div>
+    <div class="map reveal"><div id="map" role="img" aria-label="Mapa con la zona aproximada de la villa en La Zubia, Granada"></div><span>Zona aproximada (círculo de unos 400 m) en La Zubia, Granada. La dirección exacta se envía al reservar.</span></div>
+  </div>
+</section>
+
+<!-- INFO PRACTICA -->
+<section class="sec" style="padding-top:20px" id="info">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Antes de reservar</p><h2>Lo <em>práctico</em></h2></div>
+    <div class="info-grid">
+      <div class="icard reveal"><h3>Llegada y salida</h3><ul><li>Llegada a partir de las 16:00</li><li>Salida antes de las 11:00</li><li>Llegada autónoma con caja de llaves</li><li>Se puede dejar el equipaje antes o después</li><li>Estancias de 28 días o más permitidas</li></ul></div>
+      <div class="icard reveal"><h3>Normas de la casa</h3><ul><li>Se admiten mascotas</li><li>Se admiten animales de asistencia</li><li class="no">No se permiten fiestas ni molestias a los vecinos: es una zona residencial</li></ul></div>
+      <div class="icard reveal"><h3>Seguridad</h3><ul><li>Detector de humo</li><li>Detector de monóxido de carbono</li><li>Extintor y botiquín</li><li>Jardín vallado en todo el perímetro</li><li>Estructura de juego en el exterior</li></ul></div>
+      <div class="icard reveal"><h3>Accesibilidad y aparcamiento</h3><ul><li>Aparcamiento gratis en la propiedad y en la calle</li><li>Plaza de aparcamiento para personas con discapacidad</li><li>Ducha sin escalones</li><li>Entrada privada</li></ul></div>
+    </div>
+    <div class="host reveal" style="margin-top:34px">
+      <div class="av">M</div>
+      <div><h3>Te recibe Mar</h3><p>Superanfitriona con 5 años de experiencia, junto a sus coanfitriones Javier e Iago. Responden en menos de una hora (índice de respuesta del 100 %) y suelen recibir a los huéspedes en persona.</p><div class="tags"><span>Superanfitriona</span><span>Responde en menos de 1 h</span><span>Comunicación 5,0</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding-top:20px">
+  <div class="wrap" style="max-width:900px">
+    <div class="sec-head reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que <em>más nos preguntan</em></h2></div>
+    <details><summary>¿Cuántas personas caben en la villa?</summary><p>Más de 16 huéspedes, repartidos en 7 dormitorios con 17 camas y 5 baños. Es ideal para familias numerosas y grupos de amigos.</p></details>
+    <details><summary>¿Cuándo se puede usar la piscina?</summary><p>La piscina es privada, de agua salada y está disponible las 24 horas de abril a octubre, según la temporada. Incluye juguetes para la piscina.</p></details>
+    <details><summary>¿Se admiten mascotas?</summary><p>Sí, se admiten mascotas. El jardín está vallado en todo el perímetro.</p></details>
+    <details><summary>¿Se pueden hacer fiestas o celebraciones?</summary><p>No. La villa está en una zona residencial tranquila y no se permiten fiestas ni molestias a los vecinos.</p></details>
+    <details><summary>¿Cómo es la llegada?</summary><p>La llegada es autónoma, con una caja de seguridad para las llaves, a partir de las 16:00. La salida es antes de las 11:00 y puedes dejar el equipaje antes o después de esas horas.</p></details>
+    <details><summary>¿Cuánto se tarda hasta la Alhambra?</summary><p>Unos 10 minutos hasta la Alhambra y el centro de Granada. También hay un bus (línea 175) cerca de la villa.</p></details>
+    <details><summary>¿Hay aparcamiento?</summary><p>Sí, hay aparcamiento gratuito en la propiedad y también gratis en la calle.</p></details>
+    <details><summary>¿Tenéis cuna para bebés?</summary><p>Sí, hay cuna y parque de viaje disponibles previa solicitud, además de libros y juguetes para distintas edades.</p></details>
+    <details><summary>¿Cuál es la política de cancelación y el precio?</summary><p>Dependen de las fechas elegidas. Te indicamos el precio y las condiciones al responder a tu solicitud de reserva.</p></details>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="slot"><img src="img/atardecer.jpg" alt=""><video data-src="video/atardecer.mp4" muted loop playsinline preload="auto"></video></div>
+  <div class="in"><h2>Tu próximo verano <em style="color:#ffd2b3">empieza aquí</em></h2><p>Elige tus fechas y escríbenos: reserva directa, sin comisiones de plataformas.</p><a class="btn" href="#reservar">Reservar ahora</a></div>
+</section>
+<!-- RESERVA DIRECTA -->
+<section class="sec book-sec" id="reservar">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Reserva directa</p><h2>Reserva <em>sin comisiones</em></h2><p class="lead">Elige tus fechas, mira el precio y envíanos tu solicitud. Te confirmamos la disponibilidad y los detalles directamente con nosotros, sin intermediarios.</p></div>
+    <div class="bk">
+      <div class="bk-cal" id="bkCal" data-dyn></div>
+      <form class="bk-form" id="bkForm" data-dyn novalidate></form>
+    </div>
+  </div>
+</section>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div><h4>Villa Mare</h4><p>Villa con piscina en La Zubia, Granada, a los pies de Sierra Nevada. Alojamiento turístico registrado.</p></div>
+    <div><h4>Explora</h4><p><a href="#piscina">Piscina</a><br><a href="#dormitorios">Dormitorios</a><br><a href="#comodidades">Comodidades</a><br><a href="#faq">Preguntas</a></p></div>
+    <div><h4>Reservas</h4><p><a href="#reservar">Solicitar reserva →</a></p></div>
+    <div class="reg">Registro autonómico de Andalucía: VUT/GR/06222 · Registro nacional de España: ESFCTU0000180220007054560000000000000000VUT/GR/062226</div>
+  </div>
+</footer>
+
+<div class="book" id="book"><span><b>4,95 ★</b><small>Villa Mare · Granada</small></span><a class="btn" href="#reservar">Ver disponibilidad</a></div>
+
+<div class="lb" id="lb" data-dyn role="dialog" aria-modal="true" aria-label="Visor de fotos"><button class="x" aria-label="Cerrar">×</button><button class="pv" aria-label="Anterior">‹</button><img alt=""><p></p><button class="nx" aria-label="Siguiente">›</button></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/config.js?v=1792401771"></script>
+<script src="js/en.js?v=1792401771"></script>
+<script src="js/i18n.js?v=1792401771"></script>
+<script src="js/main.js?v=1792401771"></script>
+</body>
+</html>

@@ -318,3 +318,6 @@ nav .logo{white-space:nowrap}
 
 .mt>video{position:absolute;inset:0;opacity:0;transition:opacity .8s}
 .mt>video.on{opacity:1}
+
+.tapbtn{position:absolute;right:16px;bottom:16px;z-index:4;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.88);color:var(--ink);font-size:20px;padding-left:3px;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.25);backdrop-filter:blur(6px)}
+.hero .tapbtn{bottom:90px}

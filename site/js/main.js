@@ -61,29 +61,36 @@ function detectBars(v){
    entonces se queda la foto). Se cargan al acercarse a ellos y se pausan fuera de pantalla para ahorrar datos y batería. */
 const saveData=!!(navigator.connection&&(navigator.connection.saveData||/(^|-)(2g|3g)/.test(navigator.connection.effectiveType||'')));
 const noVideo=reduce||saveData;
-function tryPlay(v){const p=v.play();if(p&&p.catch)p.catch(()=>{})}
+function needTap(v){ // el móvil bloquea el autoplay: se ofrece un botón ▶ (un toque del usuario sí permite reproducir)
+  const p=v.parentElement;if(!p||p.querySelector(':scope>.tapbtn'))return;
+  const b=document.createElement('button');b.type='button';b.className='tapbtn';b.setAttribute('aria-label','Reproducir vídeo / Play video');b.textContent='▶';
+  b.addEventListener('click',e=>{e.stopPropagation();v.play().then(()=>{v.classList.add('on');b.remove()}).catch(()=>{})});
+  v.addEventListener('playing',()=>b.remove(),{once:true});
+  p.appendChild(b);
+}
+function tryPlay(v){const p=v.play();if(p&&p.catch)p.catch(err=>{if(err&&err.name==='NotAllowedError')needTap(v)})}
 const vio='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{
   const v=e.target;v._vis=e.isIntersecting;
   if(e.isIntersecting){
-    if(!v.src&&v.dataset.src)v.src=v.dataset.src;
-    if(v._ok&&!v.dataset.lazyshow&&!v.dataset.tour)tryPlay(v);
+    if(!v.src&&v.dataset.src){v.preload='auto';v.src=v.dataset.src}
+    if(!v.dataset.lazyshow&&!v.dataset.tour)tryPlay(v); // se intenta arrancar sin esperar a canplay (iOS no carga antes de play())
   }else if(!v.dataset.lazyshow&&!v.dataset.tour)v.pause();
 }),{rootMargin:'300px 0px'}):null;
 function initVideo(v){
   if(noVideo)return;
   v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.playsInline=true;v.setAttribute('playsinline','');
+  v.addEventListener('loadedmetadata',()=>{v._ok=true;v.dispatchEvent(new Event('vready'))},{once:true});
   v.addEventListener('loadeddata',()=>{v._box=detectBars(v);fitVideo(v)},{once:true});
-  v.addEventListener('canplay',()=>{v._ok=true;v.dispatchEvent(new Event('vready'));if(!v.dataset.lazyshow&&!v.dataset.tour&&(v._vis||!vio))tryPlay(v)},{once:true});
   v.addEventListener('playing',()=>{if(!v.dataset.lazyshow)v.classList.add('on')});
   if(v.dataset.end)v.addEventListener('timeupdate',()=>{ // tramo de un vídeo: se repite o se queda en el último fotograma
     if(v.currentTime>=+v.dataset.end){if('once' in v.dataset)v.pause();else v.currentTime=0}
   });
-  if(vio)vio.observe(v);else v.src=v.dataset.src;
+  if(vio)vio.observe(v);else{v.preload='auto';v.src=v.dataset.src}
 }
 $$('.tour video').forEach(v=>v.dataset.tour='1');
 $$('video[data-src]').forEach(initVideo);
 // si el navegador exigía un gesto del usuario, se reintenta en el primer toque
-['touchend','pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>$$('video[data-src]').forEach(v=>{if(v._vis&&v._ok&&v.paused&&!v.dataset.lazyshow&&!v.dataset.tour)tryPlay(v)}),{once:true,passive:true}));
+['touchend','pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>$$('video[data-src]').forEach(v=>{if(v._vis&&v.paused&&!v.dataset.lazyshow&&!v.dataset.tour)tryPlay(v)}),{once:true,passive:true}));
 addEventListener('resize',()=>$$('video[data-src]').forEach(fitVideo));
 
 /* ===== Nav / menú / progreso / barra de reserva ===== */
@@ -125,7 +132,7 @@ const sp=(function(){
   let cur=0,idx=0,timer;
   const phs=SPACES.map((s,i)=>{const d=document.createElement('div');d.className='ph'+(i?'':' on');d.innerHTML=img(s.i[0],'',i>0)+(s.v?`<video data-src="${s.v}" data-lazyshow="1" muted loop playsinline preload="auto"></video>`:'')+`<div class="info"><h3 style="margin-bottom:6px"></h3><p></p></div>`;view.insertBefore(d,dots);const v=$('video',d);if(v){v.addEventListener('vready',()=>syncVid());initVideo(v)}return d});
   function syncVid(){ // el vídeo solo se ve en su diapositiva (vi, por defecto la primera)
-    phs.forEach((p,j)=>{const v=$('video',p);if(!v)return;const on=j===cur&&idx===(SPACES[j].vi||0)&&v._ok;if(on){const pr=v.play();if(pr&&pr.then)pr.then(()=>v.classList.add('on')).catch(()=>v.classList.remove('on'));else v.classList.add('on')}else{v.classList.remove('on');v.pause()}});
+    phs.forEach((p,j)=>{const v=$('video',p);if(!v)return;const on=j===cur&&idx===(SPACES[j].vi||0)&&v._ok;if(on){const pr=v.play();if(pr&&pr.then)pr.then(()=>v.classList.add('on')).catch(err=>{v.classList.remove('on');if(err&&err.name==='NotAllowedError')needTap(v)});else v.classList.add('on')}else{v.classList.remove('on');v.pause()}});
   }
   function render(){
     list.innerHTML=SPACES.map((s,i)=>`<button role="tab" data-i="${i}" class="${i===cur?'on':''}">${L(s.n)}<small>${L(s.s)}</small></button>`).join('');
@@ -368,7 +375,7 @@ function initMotion(){
   // Recorrido fijado: cada plano entra con zoom y cambia el texto
   const layers=$$('.tour .layer');
   function tourPlay(i){layers.forEach((l,k)=>{const v=$('video',l);if(!v)return;if(k===i)tryPlay(v);else v.pause()})}
-  const tourVids=$$('.tour video');tourVids.forEach(v=>v.addEventListener('canplay',()=>{const k=+(cap.dataset.i||0);if($('video',layers[k])===v&&v._vis)tryPlay(v)}));
+  const tourVids=$$('.tour video');tourVids.forEach(v=>v.addEventListener('loadedmetadata',()=>{const k=+(cap.dataset.i||0);if($('video',layers[k])===v&&v._vis)tryPlay(v)}));
   const tl=gsap.timeline({scrollTrigger:{trigger:'.tour',start:'top top',end:'+=420%',scrub:.6,pin:true,onToggle:s=>{if(s.isActive)tourPlay(+(cap.dataset.i||0));else layers.forEach(l=>{const v=$('video',l);if(v)v.pause()})},
     onUpdate:s=>{const i=Math.min(layers.length-1,Math.floor(s.progress*layers.length*.999));if(cap.dataset.i!=i){cap.dataset.i=i;tourPlay(i);paintCap();gsap.fromTo(cap,{y:24,opacity:0},{y:0,opacity:1,duration:.6})}}}});
   layers.forEach((l,i)=>{

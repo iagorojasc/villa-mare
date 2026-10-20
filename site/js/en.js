@@ -148,5 +148,7 @@ window.EN={
 "Solicitar reserva →": "Request a booking →",
 "Mapa con la zona aproximada de la villa en La Zubia, Granada": "Map showing the approximate area of the villa in La Zubia, Granada",
 "Zona aproximada (círculo de unos 400 m) en La Zubia, Granada. La dirección exacta se envía al reservar.": "Approximate area (about 400 m circle) in La Zubia, Granada. The exact address is sent when you book.",
-"Reunirse": "Gather"
+"Reunirse": "Gather",
+"Aviso legal": "Legal notice",
+"Política de privacidad": "Privacy policy"
 };

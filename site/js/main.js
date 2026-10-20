@@ -1,6 +1,6 @@
 /* ===== Datos (par [es, en]) ===== */
 const SPACES=[
-  {n:['Salón con vistas','Living room with views'],s:['Chimenea · TV 70"','Fireplace · 70" TV'],t:['Sofás amplios, chimenea eléctrica, televisión de 70 pulgadas con Netflix y Prime Video, y ventanales que se abren al valle de Granada.','Roomy sofas, an electric fireplace, a 70-inch TV with Netflix and Prime Video, and big windows opening onto the Granada valley.'],i:['salon','salon2','salon4','salon5']},
+  {n:['Salón con vistas','Living room with views'],s:['Chimenea · TV 70"','Fireplace · 70" TV'],t:['Sofás amplios, chimenea eléctrica, televisión de 70 pulgadas con Netflix y Prime Video, y ventanales que se abren al valle de Granada.','Roomy sofas, an electric fireplace, a 70-inch TV with Netflix and Prime Video, and big windows opening onto the Granada valley.'],i:['salon2','salon','salon4','salon5'],v:'video/salon2.mp4'},
   {n:['Cocina','Kitchen'],s:['Totalmente equipada','Fully equipped'],t:['Frigorífico doble, horno, microondas, lavavajillas, Nespresso, tostadora, batidora y arrocera. Aceite, sal y pimienta, y todo el menaje que hace falta para cocinar para un grupo.','Double fridge, oven, microwave, dishwasher, Nespresso, toaster, blender and rice cooker. Oil, salt and pepper, and all the kitchenware you need to cook for a group.'],i:['cocina','cocina2']},
   {n:['Comedor','Dining room'],s:['Para todos a la vez','Everyone at once'],t:['Mesas amplias junto a los ventanales, con luz natural y vistas, para comer todos juntos sin amontonarse.','Large tables by the windows, with natural light and views, so everyone can eat together without squeezing in.'],i:['comedor3','comedor','comedor2']},
   {n:['Porche y barbacoa','Porch & barbecue'],s:['Comer al aire libre','Dining outdoors'],t:['Mesa larga bajo el porche, barbacoa con parrilla, carbón y brochetas, tumbonas y hamaca. La hora de la comida se alarga sola.','A long table under the porch, a barbecue with grill, charcoal and skewers, sun loungers and a hammock. Lunch stretches on all by itself.'],i:['porche','porche3','barbacoa','porche2']},
@@ -38,7 +38,8 @@ const hasGsap=!!(window.gsap&&window.ScrollTrigger)&&!reduce;
 function fitVideo(v){
   const b=v._box;if(!b)return;
   const sl=v.parentElement,W=sl.clientWidth,H=sl.clientHeight;if(!W||!H)return;
-  const Vw=Math.max(W/b.w,H/(b.h*9/16)),Vh=Vw*9/16;
+  const ar=(v.videoHeight/v.videoWidth)||9/16;
+  const Vw=Math.max(W/b.w,H/(b.h*ar)),Vh=Vw*ar;
   Object.assign(v.style,{width:Vw+'px',height:Vh+'px',left:(W/2-b.cx*Vw)+'px',top:(H/2-b.cy*Vh)+'px',right:'auto',bottom:'auto',objectFit:'fill'});
 }
 function detectBars(v){

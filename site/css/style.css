@@ -308,9 +308,9 @@ nav .logo{white-space:nowrap}
 .mt img{position:absolute;inset:0;transition:transform .9s}
 .mt:hover img{transform:scale(1.06)}
 .mt figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px 20px 16px;color:#fff;font-family:var(--serif);font-size:1.25rem;font-weight:300;background:linear-gradient(0deg,rgba(20,10,0,.7),transparent)}
-.mt.a{grid-column:span 7;height:440px}.mt.b{grid-column:span 5;height:440px}
+.mt.a{grid-column:span 4;height:540px}.mt.b{grid-column:span 8;height:540px}
 .mt.c,.mt.d,.mt.e,.mt.f{grid-column:span 3;height:300px}
-@media(max-width:860px){.mt.a,.mt.b{grid-column:span 12;height:300px}.mt.c,.mt.d,.mt.e,.mt.f{grid-column:span 6;height:220px}.mt figcaption{font-size:1.05rem;padding:50px 14px 12px}}
+@media(max-width:860px){.mt.a{grid-column:span 12;height:480px}.mt.b{grid-column:span 12;height:260px}.mt.c,.mt.d,.mt.e,.mt.f{grid-column:span 6;height:220px}.mt figcaption{font-size:1.05rem;padding:50px 14px 12px}}
 .meet-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:30px}
 .mf{background:var(--sand);border-radius:18px;padding:20px 22px;font-size:.95rem}
 .mf b{display:block;font-family:var(--serif);font-weight:300;font-size:1.3rem;margin-bottom:4px;color:var(--terra)}

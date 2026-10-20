@@ -1,6 +1,6 @@
 /* ===== Datos (par [es, en]) ===== */
 const SPACES=[
-  {n:['Salón con vistas','Living room with views'],s:['Chimenea · TV 70"','Fireplace · 70" TV'],t:['Sofás amplios, chimenea eléctrica, televisión de 70 pulgadas con Netflix y Prime Video, y ventanales que se abren al valle de Granada.','Roomy sofas, an electric fireplace, a 70-inch TV with Netflix and Prime Video, and big windows opening onto the Granada valley.'],i:['salon2','salon','salon4','salon5'],v:'video/salon2.mp4'},
+  {n:['Salón con vistas','Living room with views'],s:['Chimenea · TV 70"','Fireplace · 70" TV'],t:['Sofás amplios, chimenea eléctrica, televisión de 70 pulgadas con Netflix y Prime Video, y ventanales que se abren al valle de Granada.','Roomy sofas, an electric fireplace, a 70-inch TV with Netflix and Prime Video, and big windows opening onto the Granada valley.'],i:['salon','salon2','salon4','salon5'],v:'video/salon2.mp4',vi:1},
   {n:['Cocina','Kitchen'],s:['Totalmente equipada','Fully equipped'],t:['Frigorífico doble, horno, microondas, lavavajillas, Nespresso, tostadora, batidora y arrocera. Aceite, sal y pimienta, y todo el menaje que hace falta para cocinar para un grupo.','Double fridge, oven, microwave, dishwasher, Nespresso, toaster, blender and rice cooker. Oil, salt and pepper, and all the kitchenware you need to cook for a group.'],i:['cocina','cocina2']},
   {n:['Comedor','Dining room'],s:['Para todos a la vez','Everyone at once'],t:['Mesas amplias junto a los ventanales, con luz natural y vistas, para comer todos juntos sin amontonarse.','Large tables by the windows, with natural light and views, so everyone can eat together without squeezing in.'],i:['comedor3','comedor','comedor2']},
   {n:['Porche y barbacoa','Porch & barbecue'],s:['Comer al aire libre','Dining outdoors'],t:['Mesa larga bajo el porche, barbacoa con parrilla, carbón y brochetas, tumbonas y hamaca. La hora de la comida se alarga sola.','A long table under the porch, a barbecue with grill, charcoal and skewers, sun loungers and a hammock. Lunch stretches on all by itself.'],i:['porche','porche3','barbacoa','porche2']},
@@ -106,8 +106,8 @@ const sp=(function(){
   const dots=document.createElement('div');dots.className='sp-dots';dots.id='spDots';view.appendChild(dots);
   let cur=0,idx=0,timer;
   const phs=SPACES.map((s,i)=>{const d=document.createElement('div');d.className='ph'+(i?'':' on');d.innerHTML=img(s.i[0],'',i>0)+(s.v?`<video data-src="${s.v}" data-lazyshow="1" muted loop playsinline preload="auto"></video>`:'')+`<div class="info"><h3 style="margin-bottom:6px"></h3><p></p></div>`;view.insertBefore(d,dots);const v=$('video',d);if(v){v.addEventListener('vready',()=>syncVid());initVideo(v)}return d});
-  function syncVid(){ // el vídeo solo se ve en la primera diapositiva de su pestaña
-    phs.forEach((p,j)=>{const v=$('video',p);if(!v)return;const on=j===cur&&idx===0&&v._ok;v.classList.toggle('on',on);if(on)v.play().catch(()=>{});else v.pause()});
+  function syncVid(){ // el vídeo solo se ve en su diapositiva (vi, por defecto la primera)
+    phs.forEach((p,j)=>{const v=$('video',p);if(!v)return;const on=j===cur&&idx===(SPACES[j].vi||0)&&v._ok;v.classList.toggle('on',on);if(on)v.play().catch(()=>{});else v.pause()});
   }
   function render(){
     list.innerHTML=SPACES.map((s,i)=>`<button role="tab" data-i="${i}" class="${i===cur?'on':''}">${L(s.n)}<small>${L(s.s)}</small></button>`).join('');
@@ -122,7 +122,7 @@ const sp=(function(){
     const im=$('img',phs[i]);im.src=`img/${SPACES[i].i[k]}.jpg`;im.loading='eager';
     renderDots();syncVid();restart();
   }
-  function restart(){clearInterval(timer);if(reduce)return;timer=setInterval(()=>show(cur,(idx+1)%SPACES[cur].i.length),(idx===0&&SPACES[cur].v)?8000:4500)}
+  function restart(){clearInterval(timer);if(reduce)return;timer=setInterval(()=>show(cur,(idx+1)%SPACES[cur].i.length),(idx===(SPACES[cur].vi||0)&&SPACES[cur].v)?8000:4500)}
   list.onclick=e=>{const b=e.target.closest('button');if(b)show(+b.dataset.i)};
   dots.onclick=e=>{const d=e.target.closest('i');if(d)show(cur,+d.dataset.k)};
   restart();

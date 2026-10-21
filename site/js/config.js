@@ -5,7 +5,7 @@
    3) DISPONIBILIDAD: la rellena automáticamente tools/sync_availability.py (ver tools/LEEME.md).
 */
 window.VILLA={
-  contact:{whatsapp:"34609554851",email:"fjrojas@ugr.es"},
+  contact:{whatsapp:"34609554851",email:"villamaregranada@gmail.com"},
   currency:"EUR",
   maxGuests:20,
   cleaningFee:0,             // sin gastos de limpieza

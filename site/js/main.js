@@ -245,7 +245,7 @@ const BK=(function(){
     const n=Math.round((end-start)/864e5),per=new Map();let sub=0,priced=true;
     for(let i=0;i<n;i++){
       const day=addDays(start,i),se=seasonFor(day),wk=day.getDay()===5||day.getDay()===6;
-      const price=se&&(wk&&se.weekendNightly>0?se.weekendNightly:se.nightly);
+      const price=se&&(se.byDow?se.byDow[day.getDay()]:(wk&&se.weekendNightly>0?se.weekendNightly:se.nightly));
       if(!(price>0)){priced=false;continue}
       const k=L([se.name.es,se.name.en])+'|'+price;
       const o=per.get(k)||{name:L([se.name.es,se.name.en]),price,count:0};o.count++;per.set(k,o);sub+=price;
@@ -253,7 +253,8 @@ const BK=(function(){
     const se0=seasonFor(start),minN=se0&&se0.minNights||1,clean=cfg.cleaningFee>0?cfg.cleaningFee:0;
     const g=guests(),xg=cfg.extraGuest||{free:99,perNight:0},extraN=Math.max(0,g-xg.free),extra=extraN*xg.perNight*n;
     const pct=((cfg.stayDiscounts||[]).filter(([m])=>n>=m).pop()||[0,0])[1],disc=Math.round(sub*pct/100);
-    return{n,per:[...per.values()],sub,clean,extraN,extra,pct,disc,total:sub-disc+extra+clean,priced,minN};
+    const base=sub-disc+extra+clean,dd=(priced&&cfg.directDiscount)?(base<cfg.directDiscount.threshold?cfg.directDiscount.below:cfg.directDiscount.above):0;
+    return{n,per:[...per.values()],sub,clean,extraN,extra,pct,disc,base,dd,total:base-dd,priced,minN};
   }
   function guests(){const el=formEl.querySelector('#bkG');return Math.max(1,parseInt(el&&el.value,10)||2)}
 
@@ -324,6 +325,7 @@ const BK=(function(){
       if(q.disc)h+=`<div class="row2"><span>${L(['Descuento por estancia','Length-of-stay discount'])} (−${q.pct} %)</span><span>−${money(q.disc)}</span></div>`;
       if(q.extra)h+=`<div class="row2"><span>${q.extraN} ${L(q.extraN===1?['huésped adicional','extra guest']:['huéspedes adicionales','extra guests'])} × ${money(cfg.extraGuest.perNight)} × ${q.n} ${L(['noches','nights'])}</span><span>${money(q.extra)}</span></div>`;
       h+=`<div class="row2"><span>${L(['Gastos de limpieza','Cleaning fee'])}</span><span>${q.clean?money(q.clean):L(['Sin coste','Free'])}</span></div>`;
+      if(q.dd)h+=`<div class="row2"><span>${L(['Descuento por reserva directa','Direct booking discount'])}</span><span>−${money(q.dd)}</span></div>`;
       h+=`<div class="row2 tot"><span>${L(['Total estimado','Estimated total'])}</span><span>${money(q.total)}</span></div><div class="none" style="font-size:.78rem;margin-top:6px">${L(['Precio orientativo: te confirmamos el importe final al responder.','Indicative price: we confirm the final amount when we reply.'])}</div>`;
     }else h+=`<div class="none" style="margin-top:6px">${L(['Te enviaremos el presupuesto para estas fechas.','We will send you a quote for these dates.'])}</div>`;
     el.innerHTML=h;

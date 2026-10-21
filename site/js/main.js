@@ -318,15 +318,15 @@ const BK=(function(){
     const el=$('#bkSum');if(!el)return;
     if(!start){el.innerHTML=`<span class="none">${L(['Selecciona tu fecha de llegada en el calendario.','Select your arrival date on the calendar.'])}</span>`;return}
     if(!end){el.innerHTML=`<div class="row2"><span>${L(['Llegada','Arrival'])}</span><b>${fmt(start)}</b></div><span class="none">${L(['Ahora elige la fecha de salida.','Now choose your departure date.'])}</span>`;return}
-    const q=quote();let h=`<div class="row2"><span>${L(['Llegada','Arrival'])}</span><b>${fmt(start)}</b></div><div class="row2"><span>${L(['Salida','Departure'])}</span><b>${fmt(end)}</b></div><div class="row2"><span>${L(['Estancia','Stay'])}</span><b>${q.n} ${L(q.n===1?['noche','night']:['noches','nights'])}</b></div>`;
+    const q=quote();let h=(q.priced&&q.dd)?`<div class="ddban"><b>−${money(q.dd)}</b><span>${L(['¡Ahorras reservando directamente con nosotros!','You save by booking directly with us!'])}</span></div>`:'';h+=`<div class="row2"><span>${L(['Llegada','Arrival'])}</span><b>${fmt(start)}</b></div><div class="row2"><span>${L(['Salida','Departure'])}</span><b>${fmt(end)}</b></div><div class="row2"><span>${L(['Estancia','Stay'])}</span><b>${q.n} ${L(q.n===1?['noche','night']:['noches','nights'])}</b></div>`;
     if(q.n<q.minN)h+=`<div class="warn">${L(['Estancia mínima en esas fechas: ','Minimum stay on those dates: '])}${q.minN} ${L(['noches','nights'])}.</div>`;
     if(q.priced){
       h+=q.per.map(p=>`<div class="row2"><span>${p.count} × ${money(p.price)} · ${p.name}</span><span>${money(p.count*p.price)}</span></div>`).join('');
       if(q.disc)h+=`<div class="row2"><span>${L(['Descuento por estancia','Length-of-stay discount'])} (−${q.pct} %)</span><span>−${money(q.disc)}</span></div>`;
       if(q.extra)h+=`<div class="row2"><span>${q.extraN} ${L(q.extraN===1?['huésped adicional','extra guest']:['huéspedes adicionales','extra guests'])} × ${money(cfg.extraGuest.perNight)} × ${q.n} ${L(['noches','nights'])}</span><span>${money(q.extra)}</span></div>`;
       h+=`<div class="row2"><span>${L(['Gastos de limpieza','Cleaning fee'])}</span><span>${q.clean?money(q.clean):L(['Sin coste','Free'])}</span></div>`;
-      if(q.dd)h+=`<div class="row2"><span>${L(['Descuento por reserva directa','Direct booking discount'])}</span><span>−${money(q.dd)}</span></div>`;
-      h+=`<div class="row2 tot"><span>${L(['Total estimado','Estimated total'])}</span><span>${money(q.total)}</span></div><div class="none" style="font-size:.78rem;margin-top:6px">${L(['Precio orientativo: te confirmamos el importe final al responder.','Indicative price: we confirm the final amount when we reply.'])}</div>`;
+      if(q.dd)h+=`<div class="row2 ddrow"><span>${L(['Descuento por reserva directa','Direct booking discount'])}</span><span>−${money(q.dd)}</span></div>`;
+      h+=`<div class="row2 tot"><span>${L(['Total estimado','Estimated total'])}</span><span>${q.dd?`<s class="was">${money(q.base)}</s> `:''}${money(q.total)}</span></div><div class="none" style="font-size:.78rem;margin-top:6px">${L(['Precio orientativo: te confirmamos el importe final al responder.','Indicative price: we confirm the final amount when we reply.'])}</div>`;
     }else h+=`<div class="none" style="margin-top:6px">${L(['Te enviaremos el presupuesto para estas fechas.','We will send you a quote for these dates.'])}</div>`;
     el.innerHTML=h;
   }

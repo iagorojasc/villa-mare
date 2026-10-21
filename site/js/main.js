@@ -1,7 +1,7 @@
 /* ===== Datos (par [es, en]) ===== */
 const SPACES=[
   {n:['Salón con vistas','Living room with views'],s:['Chimenea · TV 70"','Fireplace · 70" TV'],t:['Sofás amplios, chimenea eléctrica, televisión de 70 pulgadas con Netflix y Prime Video, y ventanales que se abren al valle de Granada.','Roomy sofas, an electric fireplace, a 70-inch TV with Netflix and Prime Video, and big windows opening onto the Granada valley.'],i:['salon2','salon','salon4','salon5'],v:'video/salon2.mp4',vi:0},
-  {n:['Cocina','Kitchen'],s:['Totalmente equipada','Fully equipped'],t:['Frigorífico doble, horno, microondas, lavavajillas, Nespresso, tostadora, batidora y arrocera. Aceite, sal y pimienta, y todo el menaje que hace falta para cocinar para un grupo.','Double fridge, oven, microwave, dishwasher, Nespresso, toaster, blender and rice cooker. Oil, salt and pepper, and all the kitchenware you need to cook for a group.'],i:['cocina','cocina2']},
+  {n:['Cocina','Kitchen'],s:['Totalmente equipada','Fully equipped'],t:['Frigorífico doble, horno, microondas, lavavajillas, Nespresso, tostadora, batidora y arrocera. Aceite, sal y pimienta, y todo el menaje que hace falta para cocinar para un grupo.','Double fridge, oven, microwave, dishwasher, Nespresso, toaster, blender and rice cooker. Oil, salt and pepper, and all the kitchenware you need to cook for a group.'],i:['cocina','cocina2'],v:'video/cocina.mp4',vi:0},
   {n:['Comedor','Dining room'],s:['Para todos a la vez','Everyone at once'],t:['Mesas amplias junto a los ventanales, con luz natural y vistas, para comer todos juntos sin amontonarse.','Large tables by the windows, with natural light and views, so everyone can eat together without squeezing in.'],i:['comedor3','comedor','comedor2']},
   {n:['Porche y barbacoa','Porch & barbecue'],s:['Comer al aire libre','Dining outdoors'],t:['Mesa larga bajo el porche, barbacoa con parrilla, carbón y brochetas, tumbonas y hamaca. La hora de la comida se alarga sola.','A long table under the porch, a barbecue with grill, charcoal and skewers, sun loungers and a hammock. Lunch stretches on all by itself.'],i:['porche','porche3','barbacoa','porche2']},
   {n:['Jardín y juegos','Garden & games'],s:['Césped · canasta','Lawn · basketball hoop'],t:['Césped, canasta de baloncesto, casita y estructura de juegos infantiles y mesa de ping-pong junto a la piscina. Espacio para correr sin salir de casa.','Lawn, a basketball hoop, a playhouse and play structure for the little ones, and a ping-pong table by the pool. Room to run around without leaving home.'],i:['jardin','juegos','ninos','pingpong'],v:'video/jardin.mp4'},
@@ -21,7 +21,7 @@ const TOUR=[[['La llegada','The arrival'],['Una calle tranquila y una casa lumin
 const H1={es:[['Una'],['villa'],['a'],['los'],['pies'],['de'],['Sierra',1],['Nevada',1]],en:[['A'],['villa'],['at'],['the'],['foot'],['of'],['Sierra',1],['Nevada',1]]};
 const BIG={es:'Más de mil metros de luz, jardín y sol para compartir mesa, piscina y atardeceres con todos los tuyos.',en:'Over a thousand square metres of light, garden and sunshine to share meals, pool and sunsets with everyone you love.'};
 
-const MEET=[['mesa-festiva',['Mesa puesta para una comida en grupo','Table set for a group meal']],['comedor',['Comedor con mesas redondas y vistas','Dining room with round tables and views']],['porche2',['Mesa larga bajo el porche','Long table under the porch']],['aperitivo',['Aperitivo junto a la piscina','Drinks by the pool']],['barbacoa2',['Cocina exterior y barbacoa','Outdoor kitchen and barbecue']],['paella',['Paella al aire libre','Paella outdoors']],['comedor4',['Comida familiar con vistas al valle','Family lunch with valley views']],['porche5',['Sobremesa en el porche','Lingering at the porch']],['rincon',['Rincón de sofás de mimbre','Wicker lounge corner']],['amigos',['Baloncesto entre amigos en el jardín','Friends playing basketball in the garden']]];
+const MEET=[['mesa-festiva',['Mesa puesta para una comida en grupo','Table set for a group meal']],['comedor',['Comedor con mesas redondas y vistas','Dining room with round tables and views']],['porche2',['Mesa larga bajo el porche','Long table under the porch']],['aperitivo',['Aperitivo junto a la piscina','Drinks by the pool']],['barbacoa',['Barbacoa con brasas','Barbecue with glowing embers']],['paella',['Paella al aire libre','Paella outdoors']],['comedor4',['Comida familiar con vistas al valle','Family lunch with valley views']],['porche5',['Sobremesa en el porche','Lingering at the porch']],['rincon',['Rincón de sofás de mimbre','Wicker lounge corner']],['amigos',['Baloncesto entre amigos en el jardín','Friends playing basketball in the garden']],['barbacoa2',['Cocina exterior y barbacoa','Outdoor kitchen and barbecue']]];
 const MEET_TXT={
  eyebrow:['Familias y amigos','Families and friends'],
  h:['Para reunirse y <em>comer todos juntos</em>','To gather and <em>eat all together</em>'],
@@ -157,7 +157,8 @@ const sp=(function(){
 /* ===== Carrusel de dormitorios ===== */
 const car=(function(){
   const tr=$('#carTrack');
-  function render(){tr.innerHTML=ROOMS.map(([n,c],i)=>`<figure data-g="room" data-i="${i}">${img(n,L(c))}<figcaption>${L(c)}</figcaption></figure>`).join('')}
+  function render(){tr.innerHTML=ROOMS.map(([n,c],i)=>`<figure data-g="room" data-i="${i}">${img(n,L(c))}<figcaption>${L(c)}</figcaption></figure>`).join('');
+    const f=$('figure',tr);if(f){const v=document.createElement('video');v.dataset.src='video/dormitorio.mp4';v.muted=v.loop=v.playsInline=true;f.insertBefore(v,f.querySelector('figcaption'));initVideo(v)}}
   const step=()=>Math.min(innerWidth*.78,440)+20;
   $('#prev').onclick=()=>tr.scrollBy({left:-step(),behavior:'smooth'});
   $('#next').onclick=()=>tr.scrollBy({left:step(),behavior:'smooth'});
@@ -198,7 +199,8 @@ const meet=(function(){
     <div class="meet-grid">${MEET.slice(0,6).map(([n,c],i)=>`<figure class="mt ${cls[i]}" data-g="meet" data-i="${i}">${img(n,L(c))}<figcaption>${L(c)}</figcaption></figure>`).join('')}</div>
     <div class="meet-feats">${MEET_TXT.feats.map(([t,d])=>`<div class="mf"><b>${L(t)}</b><span>${L(d)}</span></div>`).join('')}</div>`;
     $$('.reveal',el).forEach(e=>{e.style.opacity=1;e.style.transform='none'});
-    const a=$('.mt.a',el);if(a){const v=document.createElement('video');v.dataset.src='video/mesa.mp4';v.muted=v.loop=v.playsInline=true;v.preload='auto';a.insertBefore(v,a.querySelector('figcaption'));initVideo(v)} // vídeo de la mesa (se muestra solo si existe el archivo)
+    const MV={a:'video/mesa.mp4',e:'video/barbacoa.mp4'}; // vídeos por recuadro (solo se muestran si existe el archivo y se reproduce)
+    Object.entries(MV).forEach(([k,src])=>{const t=$('.mt.'+k,el);if(!t)return;const v=document.createElement('video');v.dataset.src=src;v.muted=v.loop=v.playsInline=true;t.insertBefore(v,t.querySelector('figcaption'));initVideo(v)});
     if(hasGsap)gsap.from($$('.mt',el),{y:40,opacity:0,duration:.9,stagger:.08,scrollTrigger:{trigger:$('.meet-grid',el),start:'top 88%'}});
   }
   return{render};

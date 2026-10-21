@@ -150,5 +150,7 @@ window.EN={
 "Zona aproximada (círculo de unos 400 m) en La Zubia, Granada. La dirección exacta se envía al reservar.": "Approximate area (about 400 m circle) in La Zubia, Granada. The exact address is sent when you book.",
 "Reunirse": "Gather",
 "Aviso legal": "Legal notice",
-"Política de privacidad": "Privacy policy"
+"Política de privacidad": "Privacy policy",
+"Jardín con vistas al valle de Granada": "Garden with views over the Granada valley",
+"Vistas al valle de Granada desde el jardín": "Views over the Granada valley from the garden"
 };
